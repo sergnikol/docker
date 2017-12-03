@@ -9,5 +9,7 @@ chmod +x start_mysql_5.7.sh
 
 phpmyadmin http://localhost:8080
 ```sh
-wget -q -O - https://raw.githubusercontent.com/sergnikol/docker/master/start_phpmyadmin.sh | sh -
+wget  https://raw.githubusercontent.com/sergnikol/docker/master/start_phpmyadmin.sh
+chmod +x start_phpmyadmin.sh
+./start_phpmyadmin.sh
 ```
