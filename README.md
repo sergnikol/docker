@@ -1,4 +1,4 @@
-cd <dir for copy base mysql>
+cd [dir for copy base mysql]
 
 mysql57 DEFAULT root PASSWORD: testo
 ```sh
