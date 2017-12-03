@@ -4,12 +4,9 @@ IMAGE="mysql:5.7"
 CONTAINER="mysql"
 MYSQL_PORT="3306"
 MYSQL_ROOT_PASSWORD="testo"
-docker rm -f mysql
-rm -rf mysql
 if [ ! -d "$DB_PATH"  ]
 then
     docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d --name="$CONTAINER" $IMAGE
-    #docker exec -it mysql bash
     COUNT="0"
     START_MYSQL="1"
     while [  "$START_MYSQL" == "1" ]
