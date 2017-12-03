@@ -4,7 +4,7 @@ mysql57 DEFAULT root PASSWORD: testo
 ```sh
 wget https://raw.githubusercontent.com/sergnikol/docker/master/start_mysql57.sh
 chmod +x start_mysql57.sh
-./start_mysql_5.7.sh
+./start_mysql57.sh
 ```
 
 phpmyadmin http://localhost:8080
