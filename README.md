@@ -1,15 +1,15 @@
 cd [dir for copy base mysql]
 
 mysql57 DEFAULT root PASSWORD: testo
-```sh
-wget https://raw.githubusercontent.com/sergnikol/docker/master/start_mysql57.sh
-chmod +x start_mysql57.sh
-./start_mysql57.sh
-```
 
 phpmyadmin http://localhost:8080
+
+START ALL SCRIPTS
 ```sh
-wget  https://raw.githubusercontent.com/sergnikol/docker/master/start_phpmyadmin.sh
-chmod +x start_phpmyadmin.sh
-./start_phpmyadmin.sh
+./start_all_run.sh
+```
+
+ADD VIRTUAL HOST
+```sh
+./virtual.sh [HOSTNAME] [VERSION PHP] 
 ```
