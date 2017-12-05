@@ -16,7 +16,7 @@ then
    exit;
 fi
 VALID=$(echo "$PHP_VERSION" | grep -E "^$PHP$" | wc -l | awk '{print $1}')
-if [ "$VALID" == "0" ]; then
+if [ "$VALID" = "0" ]; then
      echo "NOT VALID VERSION PHP"
      echo "example: $0 $1 (`echo $PHP_VERSION`)" 
      exit
@@ -33,7 +33,7 @@ fi
 
 
 STR=`grep -E "\s${HOST}$" /etc/hosts | wc -l | sed 's#[\n\r]##g'`;
-if [[ "$STR" == "0"  &&  "$3" == "addhost" ]]; then
+if [ "$STR" = "0" ] && [ "$3" = "addhost" ]; then
         echo "for automatic add ${HOST} to /etc/hosts use root password"
         sudo sh -c "echo \"127.0.0.1\t$HOST\">> /etc/hosts"
 fi
