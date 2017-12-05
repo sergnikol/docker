@@ -9,6 +9,8 @@ docker stop  $CONTAINER
 docker rm  $CONTAINER
 if [ ! -d $MYSQL_LOCAL_DIR  ]
 then
+    echo -n "Enter mysql ROOT PASSWORD: "
+    read MYSQL_ROOT_PASSWORD
     docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d --name="$CONTAINER" $IMAGE
     #docker exec -it mysql bash
     COUNT="0"
