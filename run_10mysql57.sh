@@ -12,13 +12,13 @@ then
     docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d --name="$CONTAINER" $IMAGE
     #docker exec -it mysql bash
     COUNT="0"
-    START_MYSQL="0"
-    while [  "$START_MYSQL" == "0" ]
+    START_CHECK="0"
+    while [  "$START_CHECK" == "0" ]
     do
        COUNT=$(( $COUNT + 1 ))
        sleep 1
-       START_MYSQL=`docker exec  $CONTAINER sh -c "ps xa | grep -E \"[0-9] mysqld$\" | grep -v grep | wc -l " | sed 's#[\n\r]##g'`
-       echo "Wait start mysql ${COUNT}s"
+       START_CHECK=`docker exec  $CONTAINER sh -c "ps xa | grep -E \"[0-9] mysqld$\" | grep -v grep | wc -l " | sed 's#[\n\r]##g'`
+       echo "Wait start  ${COUNT}s"
     done
     mkdir ${MYSQL_LOCAL_DIR}
     docker cp -a $CONTAINER:/var/lib/mysql ${MYSQL_LOCAL_DIR}/db

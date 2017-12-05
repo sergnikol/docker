@@ -17,6 +17,7 @@ docker run -it -d \
            --restart unless-stopped \
            -v ${NGINX_LOCAL_DIR}/sites:/usr/share/nginx \
            -v ${NGINX_LOCAL_DIR}/etc:/etc/nginx \
+           -v ${NGINX_LOCAL_DIR}/log:/var/log/nginx \
            --link=php56 \
            --link=php71 \
            --name="$CONTAINER" \
