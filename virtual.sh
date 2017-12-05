@@ -1,6 +1,6 @@
 #!/bin/sh
 # "generated" vhost
-source inc/init.sh
+. inc/init.sh
 HOST=$1;
 PHP=$2
 if [ -z $HOST ]
