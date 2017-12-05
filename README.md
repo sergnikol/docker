@@ -14,3 +14,6 @@ ADD VIRTUAL HOST
 ./virtual.sh [HOSTNAME] [VERSION PHP] [addhosts]  
 [addhosts] - optional param add /etc/hosts 127.0.0.1 [HOSTNAME]
 ```
+
+dir with sites 
+nginx/sites

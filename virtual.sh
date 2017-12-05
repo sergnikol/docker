@@ -28,7 +28,8 @@ PATH_CONF=${PWD}/nginx/etc/conf.d/virtual_${HOST}.conf
 mkdir -p ${DOC_ROOT_LOCAL}
 if [ ! -f $DOC_ROOT_LOCAL/index.php ]; 
 then
-    echo "<?php phpinfo();" > $DOC_ROOT_LOCAL/index.php
+    #echo "<?php phpinfo();" > $DOC_ROOT_LOCAL/index.php
+    cp inc/start_page.php $DOC_ROOT_LOCAL/index.php
 fi
 
 
