@@ -13,7 +13,7 @@ then
     #docker exec -it mysql bash
     COUNT="0"
     START_CHECK="0"
-    while [  "$START_CHECK" == "0" ]
+    while [  $START_CHECK -le 0 ]
     do
        COUNT=$(( $COUNT + 1 ))
        sleep 1
