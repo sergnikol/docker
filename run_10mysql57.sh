@@ -1,13 +1,13 @@
 #!/bin/sh
 source inc/init.sh
 CONTAINER="mysql"
-DB_PATH="$PWD/mysql"
+MYSQL_LOCAL_DIR="$PWD/mysql"
 IMAGE="mysql:5.7"
 MYSQL_PORT="3306"
 MYSQL_ROOT_PASSWORD="testo"
 docker stop  $CONTAINER
 docker rm  $CONTAINER
-if [ ! -d "$DB_PATH"  ]
+if [ ! -d $MYSQL_LOCAL_DIR  ]
 then
     docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d --name="$CONTAINER" $IMAGE
     #docker exec -it mysql bash
@@ -20,16 +20,21 @@ then
        START_MYSQL=`docker exec  $CONTAINER sh -c "ps xa | grep -E \"[0-9] mysqld$\" | grep -v grep | wc -l " | sed 's#[\n\r]##g'`
        echo "Wait start mysql ${COUNT}s"
     done
-    docker cp -a $CONTAINER:/var/lib/mysql ${DB_PATH}
-    echo "$IMAGE" > ${DB_PATH}/README.txt
+    mkdir ${MYSQL_LOCAL_DIR}
+    docker cp -a $CONTAINER:/var/lib/mysql ${MYSQL_LOCAL_DIR}/db
+    docker cp -a $CONTAINER:/var/log/mysql ${MYSQL_LOCAL_DIR}/log
+    docker cp -a $CONTAINER:/etc/mysql ${MYSQL_LOCAL_DIR}/etc
+    echo "$IMAGE" > ${MYSQL_LOCAL_DIR}/README.txt
     docker rm -f mysql
 fi
 docker run -d \
     --restart unless-stopped  \
     --name=$CONTAINER   \
-     -v ${DB_PATH}:/var/lib/mysql  \
+     -v ${MYSQL_LOCAL_DIR}/db:/var/lib/mysql  \
+     -v ${MYSQL_LOCAL_DIR}/log:/var/log/mysql  \
+     -v ${MYSQL_LOCAL_DIR}/etc:/etc/mysql  \
      -p ${MYSQL_PORT}:3306  \
         ${IMAGE}
 
-#     -v ${DB_PATH}:/var/lib/mysql  \
+#     -v ${MYSQL_LOCAL_DIR}:/var/lib/mysql  \
 #echo "docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --restart unless-stopped --name=$CONTAINER  -d -p ${MYSQL_PORT}:3306  -v ${DB_PATH}:/var/lib/mysql  ${IMAGE}"

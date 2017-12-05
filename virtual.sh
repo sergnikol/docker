@@ -32,10 +32,11 @@ then
     echo "<?php phpinfo();" > $DOC_ROOT_LOCAL/index.php
 fi
 
-STR=`grep -E "\s${HOST}$" /etc/hosts`;
-if [ -z "$STR" ] && [ "$3"=="addhost"  ]; then
-    echo "for automatic add ${HOST} to /etc/hosts use root password"
-    sudo sh -c "echo \"127.0.0.1\t$HOST\">> /etc/hosts"
+
+STR=`grep -E "\s${HOST}$" /etc/hosts | wc -l | sed 's#[\n\r]##g'`;
+if [ "$STR" == "0" ] && [ "$3" == "addhost" ]; then
+        echo "for automatic add ${HOST} to /etc/hosts use root password"
+        sudo sh -c "echo \"127.0.0.1\t$HOST\">> /etc/hosts"
 fi
      
 

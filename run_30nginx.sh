@@ -8,6 +8,7 @@ then
     mkdir $NGINX_LOCAL_DIR
     docker run --name="$CONTAINER"  -d -p 80:80 $IMAGE
     docker cp  $CONTAINER:/etc/nginx ${NGINX_LOCAL_DIR}/etc
+    docker cp  $CONTAINER:/var/log/nginx ${NGINX_LOCAL_DIR}/log
     docker cp  $CONTAINER:/usr/share/nginx ${NGINX_LOCAL_DIR}/sites
     docker stop $CONTAINER
     docker rm $CONTAINER
