@@ -12,9 +12,12 @@ then
     docker stop $CONTAINER
     docker rm $CONTAINER
 fi
-docker run -v ${NGINX_LOCAL_DIR}/sites:/usr/share/nginx \
+docker run -it -d \
+           --restart unless-stopped \
+           -v ${NGINX_LOCAL_DIR}/sites:/usr/share/nginx \
            -v ${NGINX_LOCAL_DIR}/etc:/etc/nginx \
            --link=php56 \
            --link=php71 \
-           --name="$CONTAINER" -it -d -p 80:80 $IMAGE
+           --name="$CONTAINER" \
+            -p 80:80 $IMAGE
 

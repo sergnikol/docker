@@ -11,5 +11,6 @@ START ALL SCRIPTS
 
 ADD VIRTUAL HOST
 ```sh
-./virtual.sh [HOSTNAME] [VERSION PHP] 
+./virtual.sh [HOSTNAME] [VERSION PHP] [addhosts]  
+[addhosts] - optional paramete add /etc/hosts 127.0.0.1 [HOSTNAME]
 ```

@@ -24,5 +24,12 @@ then
     echo "$IMAGE" > ${DB_PATH}/README.txt
     docker rm -f mysql
 fi
-docker run  --restart unless-stopped --name=$CONTAINER  -d -p ${MYSQL_PORT}:3306  -v ${DB_PATH}:/var/lib/mysql  ${IMAGE}
+docker run -d \
+    --restart unless-stopped  \
+    --name=$CONTAINER   \
+     -v ${DB_PATH}:/var/lib/mysql  \
+     -p ${MYSQL_PORT}:3306  \
+        ${IMAGE}
+
+#     -v ${DB_PATH}:/var/lib/mysql  \
 #echo "docker run -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --restart unless-stopped --name=$CONTAINER  -d -p ${MYSQL_PORT}:3306  -v ${DB_PATH}:/var/lib/mysql  ${IMAGE}"
