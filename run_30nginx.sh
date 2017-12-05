@@ -3,7 +3,7 @@
 IMAGE="nginx"
 docker stop $CONTAINER
 docker rm $CONTAINER
-if [ ! -d "$NGINX_LOCAL_DIR"  ]
+if [ ! -d $NGINX_LOCAL_DIR  ]
 then
     mkdir $NGINX_LOCAL_DIR
     docker run --name="$CONTAINER"  -d -p 80:80 $IMAGE
