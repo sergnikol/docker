@@ -1,5 +1,5 @@
 #!/bin/sh
-source inc/init.sh
+. inc/init.sh
 CONTAINER="mysql"
 MYSQL_LOCAL_DIR="$PWD/mysql"
 IMAGE="mysql:5.7"

@@ -1,5 +1,5 @@
 #!/bin/sh
-source inc/init.sh
+. inc/init.sh
 docker build -t php56 - < Dockerfile_php56
 IMAGE=php56
 docker stop $CONTAINER

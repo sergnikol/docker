@@ -1,5 +1,5 @@
 #!/bin/sh
-source inc/init.sh
+. inc/init.sh
 IMAGE="nginx"
 docker stop $CONTAINER
 docker rm $CONTAINER
