@@ -24,7 +24,7 @@ if [ "$VALID" = "0" ]; then
 SITES=$HOST/public
 DOC_ROOT=/usr/share/nginx/$SITES
 DOC_ROOT_LOCAL=$PWD/nginx/sites/$SITES
-PATH_CONF=${PWD}/nginx/etc/conf.d/virtual_${HOST}.conf
+PATH_CONF=${PWD}/nginx/etc/conf.d/${HOST}.conf
 mkdir -p ${DOC_ROOT_LOCAL}
 if [ ! -f $DOC_ROOT_LOCAL/index.php ]; 
 then
@@ -49,6 +49,9 @@ server {
     error_log  /var/log/nginx/error_$HOST.log;
     access_log /var/log/nginx/access_$HOST.log;
     
+    location / {
+          try_files $uri $uri/ /index.php?$query_string;
+    }
 
     location ~ \.php$ {
         try_files \$uri =404;

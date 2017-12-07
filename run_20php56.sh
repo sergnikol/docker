@@ -1,7 +1,7 @@
 #!/bin/sh
 . inc/init.sh
-docker build -t php56 - < Dockerfile_php56
 IMAGE=php56
+docker build -t $IMAGE - < Dockerfile_php56
 docker stop $CONTAINER
 docker rm $CONTAINER
 docker run  -d \

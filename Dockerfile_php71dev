@@ -1,0 +1,29 @@
+FROM php:7.1-fpm
+RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev
+RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql
+
+RUN touch /var/log/xdebug.log
+RUN chmod 777 /var/log/xdebug.log
+RUN apt-get install -y net-tools vim npm git 
+RUN git clone https://github.com/joonty/vdebug.git ~/.vim/bundle/vdebug
+COPY ./files/.vimrc /root/.vimrc
+
+RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
+  && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
+  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
+
+RUN php /tmp/composer-setup.php
+RUN mv composer.phar /usr/local/bin/composer
+RUN rm /tmp/composer-setup.php
+
+
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+RUN echo  "\
+xdebug.remote_host=localhost \n\
+xdebug.remote_port=9001 \n\
+xdebug.remote_enable=on \n\ 
+xdebug.remote_log=/var/log/xdebug.log \n\" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+
+
