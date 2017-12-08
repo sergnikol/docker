@@ -1,12 +1,12 @@
 FROM php:7.1-fpm
 RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev
-RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql
+RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql zip
 
 RUN touch /var/log/xdebug.log
 RUN chmod 777 /var/log/xdebug.log
 RUN apt-get install -y net-tools vim npm git 
+RUN apt-get install -y dnsutils 
 RUN git clone https://github.com/joonty/vdebug.git ~/.vim/bundle/vdebug
-COPY ./files/.vimrc /root/.vimrc
 
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
@@ -23,7 +23,16 @@ RUN echo  "\
 xdebug.remote_host=localhost \n\
 xdebug.remote_port=9001 \n\
 xdebug.remote_enable=on \n\ 
-xdebug.remote_log=/var/log/xdebug.log \n\" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+xdebug.remote_log=/var/log/xdebug.log " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
 
+RUN echo  "\
+syntax on \n\
+set number \n\
+:set encoding=utf-8 \n\
+:set fileencoding=utf-8 \n\
+let g:vdebug_options = {'ide_key': 'netbeans-xdebug'} \n\
+let g:vdebug_options = {'break_on_open': 0} \n\
+let g:vdebug_options = {'server': '127.0.0.1'} \n\
+let g:vdebug_options = {'port': '9001'}" >> /root/.vimrc

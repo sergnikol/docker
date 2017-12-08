@@ -1,7 +1,7 @@
 #!/bin/sh
 . inc/init.sh
 IMAGE=php71dev
-docker build -t $IMAGE - < Dockerfile_php71dev
+docker build -t $IMAGE - < Dockerfile_php71dev 
 docker stop $CONTAINER
 docker rm $CONTAINER
 docker run  -d \
