@@ -12,4 +12,5 @@ docker run  -d \
             -e PHP_IDE_CONFIG="serverName=blog" \
             --name="$CONTAINER" \
             -v ${NGINX_LOCAL_DIR}/sites:/usr/share/nginx \
+            -v $PWD/tmp:/root/tmp
              $IMAGE
