@@ -46,11 +46,11 @@ server {
     server_name $HOST;
     root $DOC_ROOT;
     index index.php index.html;
-    error_log  /var/log/nginx/error_$HOST.log;
-    access_log /var/log/nginx/access_$HOST.log;
+    error_log  /var/log/nginx/${HOST}_error.log;
+    access_log /var/log/nginx/${HOST}_access.log;
     
     location / {
-          try_files $uri $uri/ /index.php?$query_string;
+          try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
     location ~ \.php$ {
