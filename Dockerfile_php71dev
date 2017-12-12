@@ -2,6 +2,7 @@ FROM php:7.1-fpm
 RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev
 RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql zip
 
+
 RUN touch /var/log/xdebug.log
 RUN chmod 777 /var/log/xdebug.log
 RUN apt-get install -y net-tools vim npm git 
@@ -29,6 +30,7 @@ xdebug.remote_log=/var/log/xdebug.log " >> /usr/local/etc/php/conf.d/docker-php-
 
 RUN echo  "\
 syntax on \n\
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP \n\
 set number \n\
 :set encoding=utf-8 \n\
 :set fileencoding=utf-8 \n\
