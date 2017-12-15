@@ -44,3 +44,7 @@ let g:vdebug_options = {'ide_key': 'netbeans-xdebug'} \n\
 let g:vdebug_options = {'break_on_open': 0} \n\
 let g:vdebug_options = {'server': '127.0.0.1'} \n\
 let g:vdebug_options = {'port': '9001'}" >> /root/.vimrc
+
+RUN ln -s /usr/share/nginx /var/www/html/www
+RUN ln -s /usr/share/nginx /root/www
+
