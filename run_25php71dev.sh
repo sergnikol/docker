@@ -5,9 +5,9 @@ DOCKERHOST=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.
 docker build -t $IMAGE - < Dockerfile_php71dev 
 docker stop $CONTAINER
 docker rm $CONTAINER
+#-p 35729:35729 \
 docker run  -d \
             --restart unless-stopped  \
-            -p 35729:35729 \
             -e XDEBUG_CONFIG="remote_host=$DOCKERHOST" \
             --name="$CONTAINER" \
             --link=mysql \
