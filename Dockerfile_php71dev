@@ -1,20 +1,22 @@
 FROM php:7.1-fpm
-RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev
+RUN apt-get update --fix-missing -y && apt-get install -y libpng-dev libsqlite3-dev
 RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql zip
 
 
 RUN touch /var/log/xdebug.log
-RUN chmod 777 /var/log/xdebug.log
-RUN apt-get install -y net-tools vim git build-essential
+#RUN chmod 777 /var/log/xdebug.log
+RUN apt-get install -y net-tools vim
+RUN apt-get install -y git
+# build-essential
 RUN apt-get install -y nmap mc tmux screen
 RUN apt-get install -y dnsutils 
-RUN apt-get install -y mysql-client 
+#RUN apt-get install -y mysql-client 
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs
-RUN npm rebuild node-sass
+#RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+#RUN apt-get install -y nodejs
+#RUN npm rebuild node-sass
 
-RUN git clone https://github.com/joonty/vdebug.git ~/.vim/bundle/vdebug
+#RUN git clone https://github.com/joonty/vdebug.git ~/.vim/bundle/vdebug
 
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
@@ -29,26 +31,33 @@ RUN pecl install imagick-beta
 RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
 
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
-RUN echo  "\
-;xdebug.remote_host=192.168.100.227 \n\
-xdebug.remote_port=9000 \n\
-xdebug.remote_enable=on \n\ 
-xdebug.remote_log=/var/log/xdebug.log " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN pecl install xdebug
+#RUN docker-php-ext-enable xdebug
+#RUN echo  "\
+#;xdebug.remote_host=192.168.100.227 \n\
+#xdebug.remote_port=9000 \n\
+#xdebug.remote_enable=on \n\ 
+#xdebug.remote_log=/var/log/xdebug.log " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 
+
+#RUN echo  "\
+#syntax on \n\
+#autocmd FileType php set omnifunc=phpcomplete#CompletePHP \n\
+#set number \n\
+#:set encoding=utf-8 \n\
+#:set fileencoding=utf-8 \n\
+#let g:vdebug_options = {'ide_key': 'netbeans-xdebug'} \n\
+#let g:vdebug_options = {'break_on_open': 0} \n\
+#let g:vdebug_options = {'server': '127.0.0.1'} \n\
+#let g:vdebug_options = {'port': '9001'}" >> /root/.vimrc
 
 RUN echo  "\
 syntax on \n\
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP \n\
 set number \n\
 :set encoding=utf-8 \n\
-:set fileencoding=utf-8 \n\
-let g:vdebug_options = {'ide_key': 'netbeans-xdebug'} \n\
-let g:vdebug_options = {'break_on_open': 0} \n\
-let g:vdebug_options = {'server': '127.0.0.1'} \n\
-let g:vdebug_options = {'port': '9001'}" >> /root/.vimrc
+:set fileencoding=utf-8"  >> /root/.vimrc
 
 RUN ln -s /usr/share/nginx /var/www/html/www
 RUN ln -s /usr/share/nginx /root/www
