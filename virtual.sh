@@ -43,6 +43,10 @@ fi
 cat << EOF > $PATH_CONF
 server {
     listen 80;
+    gzip on;
+    gzip_disable "msie6";
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
     server_name $HOST;
     root $DOC_ROOT;
 
